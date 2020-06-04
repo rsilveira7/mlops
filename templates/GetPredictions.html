@@ -1,0 +1,26 @@
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+  function getPredict(){
+    var id_user = document.getElementById("ID").value;
+    var lat     = document.getElementById("LAT").value;
+    var retorno_api = "";
+   
+    v_api = "http://localhost:5000/GetPredict?valor1="+id_user+"&valor2="+lat+"&format=json";
+	  
+    $.get(v_api, function(data, status){
+      console.log(data);
+      document.getElementById("predict").innerHTML = "<h1>Resultado da Predição do MEDV: " + data["predict"] + "</h1>";
+    });
+
+  }
+</script>
+<html>
+<body>
+<h2>Predição do Valor médio das casas em Boston Mass USD(1000)</h2>
+ % população sem estudo(1-30): <input id="ID"  type="text" name="ID"  value="10"><br>
+ Numero médio de cômodos(3-9): <input id="LAT" type="text" name="LAT" value="6"><br>
+</br>
+<input type="button" value="Get Prediction of MEDV" onclick="getPredict();">
+<p id="predict"></p>
+</body>
+</html>
